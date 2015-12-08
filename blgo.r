@@ -12,4 +12,5 @@ require("XML")
 collection.url <- "http://www.boardgamegeek.com/xmlapi/collection/zelbinian?own=0&wanttoplay=1"
 
 # sending a request to the server, then unpacking the response in a usable XML form
-collection.xml <- xmlRoot(xmlTreeParse(getURL(collection.url)))
+collection.xml <- xmlInternalTreeParse(getURL(collection.url))
+names <- getNodeSet(collection.xml, "//name/text()")
