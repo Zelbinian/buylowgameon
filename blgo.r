@@ -5,3 +5,11 @@
 
 # first, make sure packages are installed
 require("XML")
+
+# -- GET COLLECTION FROM BGG -- #
+
+# own = 0 and wanttoplay = 1, should be obvious what those mean
+collection.url <- "http://www.boardgamegeek.com/xmlapi/collection/zelbinian?own=0&wanttoplay=1"
+
+# sending a request to the server, then unpacking the response in a usable XML form
+collection.xml <- xmlRoot(xmlTreeParse(getURL(collection.url)))
