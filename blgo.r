@@ -5,6 +5,7 @@
 
 # first, make sure packages are installed
 require("XML")
+require("RCurl")
 
 # -- GET COLLECTION FROM BGG -- #
 
@@ -13,4 +14,8 @@ collection.url <- "http://www.boardgamegeek.com/xmlapi/collection/zelbinian?own=
 
 # sending a request to the server, then unpacking the response in a usable XML form
 collection.xml <- xmlInternalTreeParse(getURL(collection.url))
-names <- getNodeSet(collection.xml, "//name/text()")
+
+# strip out the names of the games from the returned xml
+# sapplying xmlValue() helps turn it into a format R can more easily deal with
+names <- sapply(getNodeSet(collection.xml, "//name/text()"), xmlValue)
+
